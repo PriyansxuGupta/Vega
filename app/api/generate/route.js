@@ -6,8 +6,8 @@ export async function POST(request) {
       return Response.json({ error: "Invalid prompt" }, { status: 400 })
     }
 
-    const accountId = ""
-    const apiToken = ""
+    const accountId = process.env.CLOUDFLARE_ACCOUNT_ID
+    const apiToken = process.env.CLOUDFLARE_API_TOKEN
 
     if (!accountId || !apiToken) {
       console.error("Missing Cloudflare credentials")
