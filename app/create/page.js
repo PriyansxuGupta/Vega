@@ -28,14 +28,28 @@ export default function CreatePage() {
         body: JSON.stringify({ prompt }),
       })
 
-      if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || "Failed to generate image")
+      // Check if response has content
+      const text = await response.text()
+      
+      if (!text) {
+        throw new Error("Empty response from server")
       }
 
-      const data = await response.json()
+      let data
+      try {
+        data = JSON.parse(text)
+      } catch (parseError) {
+        console.error("Failed to parse response:", text)
+        throw new Error("Invalid response from server")
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || "Failed to generate image")
+      }
+
       setImage(data.image)
     } catch (err) {
+      console.error("Generation error:", err)
       setError(err instanceof Error ? err.message : "An error occurred")
     } finally {
       setLoading(false)
@@ -140,7 +154,7 @@ export default function CreatePage() {
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-6">
               <button
                 onClick={downloadImage}
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-neutral-900 border border-neutral-800 rounded-lg"
+                className="flex items-center justify-center gap-2 px-4 py-3 bg-neutral-900 border border-neutral-800 rounded-lg hover:bg-neutral-800"
               >
                 <Download className="w-4 h-4" />
                 <span className="hidden sm:inline">Download</span>
@@ -151,7 +165,7 @@ export default function CreatePage() {
                   setImage(null)
                   setPrompt("")
                 }}
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-neutral-900 border border-neutral-800 rounded-lg"
+                className="flex items-center justify-center gap-2 px-4 py-3 bg-neutral-900 border border-neutral-800 rounded-lg hover:bg-neutral-800"
               >
                 <RotateCcw className="w-4 h-4" />
                 <span className="hidden sm:inline">Regenerate</span>
@@ -159,7 +173,7 @@ export default function CreatePage() {
 
               <button
                 onClick={() => setImage(null)}
-                className="flex items-center justify-center gap-2 px-4 py-3 bg-neutral-900 border border-neutral-800 rounded-lg"
+                className="flex items-center justify-center gap-2 px-4 py-3 bg-neutral-900 border border-neutral-800 rounded-lg hover:bg-neutral-800"
               >
                 <X className="w-4 h-4" />
                 <span className="hidden sm:inline">Clear</span>
