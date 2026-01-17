@@ -20,7 +20,6 @@ export default function CreatePage() {
 
   const generateImage = async (e) => {
     e?.preventDefault()
-
     if (!prompt.trim()) {
       setError("Please enter a prompt")
       return
@@ -65,11 +64,11 @@ export default function CreatePage() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-black">
       {/* Background */}
       <div className="absolute inset-0 -z-10">
         <ColorBends rotation={-10} frequency={1} />
-        <div className="absolute inset-0 bg-black/95" />
+        <div className="absolute inset-0 bg-black/90" />
       </div>
 
       <Header />
@@ -80,7 +79,7 @@ export default function CreatePage() {
           {/* Image Canvas */}
           <div
             className="w-full aspect-square max-w-3xl mx-auto rounded-2xl overflow-hidden
-            backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl
+            backdrop-blur-xl bg-black/60 border border-neutral-800 shadow-2xl
             flex items-center justify-center"
           >
             {image ? (
@@ -92,10 +91,10 @@ export default function CreatePage() {
               />
             ) : (
               <div className="text-center space-y-3 px-6 font-mono">
-                <div className="w-14 h-14 mx-auto rounded-full bg-white/15 flex items-center justify-center">
-                  <Sparkles className="w-6 h-6 text-white/80" />
+                <div className="w-14 h-14 mx-auto rounded-full bg-neutral-900 flex items-center justify-center">
+                  <Sparkles className="w-6 h-6 text-neutral-300" />
                 </div>
-                <p className="text-white/70 text-sm">
+                <p className="text-neutral-400 text-sm">
                   {loading
                     ? "Generating image..."
                     : "Generated image will appear here"}
@@ -108,10 +107,10 @@ export default function CreatePage() {
           <form
             onSubmit={generateImage}
             className="max-w-3xl mx-auto space-y-4 backdrop-blur-xl
-            bg-white/10 border border-white/20 rounded-2xl p-6 shadow-xl"
+            bg-black/60 border border-neutral-800 rounded-2xl p-6 shadow-xl"
           >
             <div className="space-y-2">
-              <label className="text-xs font-mono text-white/70">
+              <label className="text-xs font-mono text-neutral-400">
                 Prompt
               </label>
               <textarea
@@ -119,14 +118,14 @@ export default function CreatePage() {
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="A futuristic city floating above clouds..."
                 className="w-full h-18 px-4 py-3 rounded-lg
-                bg-white/5 border border-white/20 text-white font-mono text-sm
-                placeholder:text-white/40 focus:outline-none
-                focus:ring-2 focus:ring-white/30 resize-none"
+                bg-black/70 border border-neutral-800 text-neutral-100 font-mono text-sm
+                placeholder:text-neutral-600 focus:outline-none
+                focus:ring-2 focus:ring-neutral-700 resize-none"
               />
             </div>
 
             {error && (
-              <div className="p-3 rounded-lg bg-red-500/15 border border-red-500/30 text-red-200 text-xs font-mono">
+              <div className="p-3 rounded-lg bg-red-900/30 border border-red-800 text-red-300 text-xs font-mono">
                 Error: {error}
               </div>
             )}
@@ -136,7 +135,7 @@ export default function CreatePage() {
               disabled={loading}
               className="w-full flex items-center justify-center gap-2
               px-6 py-3 rounded-lg font-semibold
-              bg-white text-black hover:bg-neutral-100
+              bg-neutral-900 text-neutral-100 hover:bg-neutral-800
               disabled:opacity-50 transition"
             >
               {loading ? (
@@ -156,9 +155,9 @@ export default function CreatePage() {
           {/* Action Bar */}
           {image && (
             <div
-              className="max-w-3xl mx-auto flex divide-x divide-white/20
+              className="max-w-3xl mx-auto flex divide-x divide-neutral-800
               rounded-xl overflow-hidden backdrop-blur-lg
-              bg-white/10 border border-white/20 shadow-lg"
+              bg-black/60 border border-neutral-800 shadow-lg"
             >
               <ActionButton onClick={downloadImage} icon={Download} label="Download" />
               <ActionButton
@@ -180,7 +179,7 @@ function ActionButton({ onClick, icon: Icon, label }) {
     <button
       onClick={onClick}
       className="flex-1 flex items-center justify-center gap-2 px-4 py-3
-      text-white font-mono text-sm hover:bg-white/20 transition"
+      text-neutral-300 font-mono text-sm hover:bg-neutral-900 transition"
     >
       <Icon className="w-4 h-4" />
       {label}
