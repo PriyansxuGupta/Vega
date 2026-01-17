@@ -3,7 +3,7 @@
 import { useState, useRef } from "react"
 import { RiAiGenerate } from "react-icons/ri"
 import { IoSparkles } from "react-icons/io5"
-import { Download, RotateCcw, Loader, Code, ArrowUpRight } from "lucide-react"
+import { Download, RotateCcw, Loader, Heart, ArrowUpRight } from "lucide-react"
 
 export default function CreatePage() {
   const [prompt, setPrompt] = useState("")
