@@ -28,7 +28,7 @@ export default function Page() {
             <ArrowRight className="w-4 h-4 opacity-80" />
           </button>
 
-          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-8 leading-tight tracking-tight bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent">
+          <h2 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-8 leading-tight tracking-tight bg-gradient-to-b from-white to-gray-300 bg-clip-text text-transparent [-webkit-text-stroke:1px_rgba(255,255,255,0.3)]">
             Unleashed, Vega AI
           </h2>
 
