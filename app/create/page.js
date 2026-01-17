@@ -31,8 +31,6 @@ export default function CreatePage() {
       })
 
       const text = await response.text()
-      if (!text) throw new Error("Empty response")
-
       const data = JSON.parse(text)
       if (!response.ok) throw new Error(data.error || "Generation failed")
 
@@ -54,7 +52,6 @@ export default function CreatePage() {
     a.href = url
     a.download = `vega-ai-${Date.now()}.png`
     a.click()
-
     URL.revokeObjectURL(url)
   }
 
@@ -65,109 +62,107 @@ export default function CreatePage() {
         <div className="absolute inset-0 bg-black/90" />
       </div>
 
-      <main className="relative z-10 flex flex-col items-center px-4 py-10 sm:py-14">
-        <div className="w-full max-w-5xl space-y-10">
+      <main className="relative z-10 flex flex-col items-center px-4 py-8">
+        {/* Title */}
+        <h1 className="mb-6 text-xl font-mono tracking-wide text-neutral-200">
+          Vega Ai
+        </h1>
 
-          <div
-            className="w-full aspect-square max-w-3xl mx-auto rounded-2xl overflow-hidden
-            backdrop-blur-xl flex items-center justify-center"
-            style={{ backgroundColor: "#111111" }}
-          >
-            {image ? (
-              <img
-                ref={imageRef}
-                src={image}
-                alt="Generated"
-                className="w-full h-full object-cover"
-              />
-            ) : (
-              <div className="text-center space-y-3 px-6 font-mono">
-                <div className="w-14 h-14 mx-auto rounded-full bg-neutral-900 flex items-center justify-center">
-                  <IoSparkles className="w-6 h-6 text-neutral-300" />
-                </div>
-                <p className="text-neutral-400 text-sm">
-                  {loading
-                    ? "Generating image..."
-                    : "Generated image will appear here"}
-                </p>
+        {/* Canvas */}
+        <div
+          className="w-full max-w-3xl aspect-square rounded-2xl overflow-hidden
+          flex items-center justify-center mb-5"
+          style={{ backgroundColor: "#111111" }}
+        >
+          {image ? (
+            <img
+              ref={imageRef}
+              src={image}
+              alt="Generated"
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="text-center space-y-3 font-mono">
+              <div className="w-12 h-12 mx-auto rounded-full bg-neutral-900 flex items-center justify-center">
+                <IoSparkles className="w-5 h-5 text-neutral-300" />
               </div>
-            )}
-          </div>
-
-          <form
-            onSubmit={generateImage}
-            className="max-w-3xl mx-auto space-y-4 backdrop-blur-xl
-            bg-black/60 border border-neutral-800 rounded-2xl p-6 shadow-xl"
-          >
-            <div className="space-y-2">
-              <label className="text-xs font-mono text-neutral-400">
-                Prompt
-              </label>
-              <textarea
-                value={prompt}
-                onChange={(e) => setPrompt(e.target.value)}
-                placeholder="A futuristic city floating above clouds..."
-                className="w-full h-18 px-4 py-3 rounded-lg
-                bg-black/70 border border-neutral-800 text-neutral-100 font-mono text-sm
-                placeholder:text-neutral-600 focus:outline-none
-                focus:ring-2 focus:ring-neutral-700
-                hover:border-white/40 resize-none transition"
-              />
-            </div>
-
-            {error && (
-              <div className="p-3 rounded-lg bg-red-900/30 border border-red-800 text-red-300 text-xs font-mono">
-                Error: {error}
-              </div>
-            )}
-
-            <button
-              type="submit"
-              disabled={loading}
-              className="w-full flex items-center justify-center gap-2
-              px-6 py-3 rounded-lg font-semibold
-              bg-white text-black hover:bg-neutral-100
-              disabled:opacity-50 transition"
-            >
-              {loading ? (
-                <>
-                  <Loader className="w-4 h-4 animate-spin" />
-                  Generating
-                </>
-              ) : (
-                <>
-                  <RiAiGenerate className="w-4 h-4" />
-                  Generate
-                </>
-              )}
-            </button>
-          </form>
-
-          {image && (
-            <div
-              className="max-w-3xl mx-auto flex divide-x divide-neutral-800
-              rounded-xl overflow-hidden backdrop-blur-lg
-              bg-black/60 border border-neutral-800 shadow-lg"
-            >
-              <ActionButton onClick={downloadImage} icon={Download} label="Download" />
-              <ActionButton onClick={generateImage} icon={RotateCcw} label="Regenerate" />
+              <p className="text-neutral-500 text-xs">
+                {loading ? "Generating image..." : "Your image will appear here"}
+              </p>
             </div>
           )}
         </div>
+
+        {/* Unified Control Bar */}
+        <form
+          onSubmit={generateImage}
+          className="w-full max-w-3xl flex items-stretch gap-2
+          bg-black/70 border border-neutral-800 rounded-xl
+          p-2 backdrop-blur-xl"
+        >
+          <textarea
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+            placeholder="A futuristic city floating above clouds..."
+            className="flex-1 resize-none px-3 py-2 rounded-lg
+            bg-black/60 border border-neutral-800
+            text-neutral-100 text-sm font-mono
+            placeholder:text-neutral-600
+            focus:outline-none focus:ring-2 focus:ring-neutral-700
+            hover:border-white/40 transition"
+          />
+
+          {/* Generate */}
+          <button
+            type="submit"
+            disabled={loading}
+            className="px-4 rounded-lg flex items-center justify-center
+            bg-white text-black font-semibold
+            disabled:opacity-50 transition"
+          >
+            {loading ? (
+              <Loader className="w-4 h-4 animate-spin" />
+            ) : (
+              <RiAiGenerate className="w-4 h-4" />
+            )}
+          </button>
+
+          {/* Actions */}
+          {image && (
+            <>
+              <Divider />
+              <IconButton onClick={downloadImage} icon={Download} />
+              <IconButton onClick={generateImage} icon={RotateCcw} />
+            </>
+          )}
+        </form>
+
+        {error && (
+          <div className="mt-3 max-w-3xl w-full
+            rounded-lg border border-red-800 bg-red-900/30
+            px-3 py-2 text-xs font-mono text-red-300">
+            Error: {error}
+          </div>
+        )}
       </main>
     </div>
   )
 }
 
-function ActionButton({ onClick, icon: Icon, label }) {
+function IconButton({ onClick, icon: Icon }) {
   return (
     <button
+      type="button"
       onClick={onClick}
-      className="flex-1 flex items-center justify-center gap-2 px-4 py-3
-      text-neutral-300 font-mono text-sm hover:bg-neutral-900 transition"
+      className="px-3 flex items-center justify-center
+      text-neutral-300 hover:bg-neutral-900
+      rounded-lg transition"
     >
       <Icon className="w-4 h-4" />
-      {label}
     </button>
   )
+}
+
+function Divider() {
+  return <div className="w-px bg-neutral-800 mx-1" />
 }
