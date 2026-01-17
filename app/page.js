@@ -5,7 +5,7 @@ import ColorBends from "@/components/ColorBends"
 
 export default function Page() {
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
+    <div className="relative w-full min-h-screen overflow-hidden">
       <div className="absolute inset-0 -z-10">
         <ColorBends autoRotate={2} frequency={1} />
       </div>
