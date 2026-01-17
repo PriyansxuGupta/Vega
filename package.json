@@ -12,7 +12,9 @@
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "lucide-react": "0.562.0",
-    "three": "0.182.0"
+    "three": "0.182.0",
+    "@types/node": "latest",
+    "@types/react": "latest"
   },
   "devDependencies": {
     "tailwindcss": "3.4.1",
