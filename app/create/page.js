@@ -1,13 +1,9 @@
 "use client"
 
 import { useState, useRef } from "react"
-import {
-  RiAiGenerate,
-  RiDownload2Line,
-  RiRestartLine,
-  RiCloseLine,
-  RiSparklingLine,
-} from "react-icons/ri"
+import { RiAiGenerate } from "react-icons/ri"
+import { IoSparkles } from "react-icons/io5"
+import { Download, RotateCcw, Loader } from "lucide-react"
 import ColorBends from "@/components/ColorBends"
 
 export default function CreatePage() {
@@ -28,7 +24,7 @@ export default function CreatePage() {
     setError("")
 
     try {
-      const response = await fetch("/api", {
+      const response = await fetch("/api/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt }),
@@ -63,7 +59,7 @@ export default function CreatePage() {
   }
 
   return (
-    <div className="relative min-h-screen overflow-hidden bg-black">
+    <div className="relative min-h-screen overflow-hidden bg-black/90">
       <div className="absolute inset-0 -z-10">
         <ColorBends rotation={-10} frequency={1} />
         <div className="absolute inset-0 bg-black/90" />
@@ -87,7 +83,7 @@ export default function CreatePage() {
             ) : (
               <div className="text-center space-y-3 px-6 font-mono">
                 <div className="w-14 h-14 mx-auto rounded-full bg-neutral-900 flex items-center justify-center">
-                  <RiSparklingLine className="w-6 h-6 text-neutral-300" />
+                  <IoSparkles className="w-6 h-6 text-neutral-300" />
                 </div>
                 <p className="text-neutral-400 text-sm">
                   {loading
@@ -114,7 +110,8 @@ export default function CreatePage() {
                 className="w-full h-18 px-4 py-3 rounded-lg
                 bg-black/70 border border-neutral-800 text-neutral-100 font-mono text-sm
                 placeholder:text-neutral-600 focus:outline-none
-                focus:ring-2 focus:ring-neutral-700 resize-none"
+                focus:ring-2 focus:ring-neutral-700
+                hover:border-white/40 resize-none transition"
               />
             </div>
 
@@ -134,7 +131,7 @@ export default function CreatePage() {
             >
               {loading ? (
                 <>
-                  <RiAiGenerate className="w-4 h-4 animate-pulse" />
+                  <Loader className="w-4 h-4 animate-spin" />
                   Generating
                 </>
               ) : (
@@ -152,9 +149,8 @@ export default function CreatePage() {
               rounded-xl overflow-hidden backdrop-blur-lg
               bg-black/60 border border-neutral-800 shadow-lg"
             >
-              <ActionButton onClick={downloadImage} icon={RiDownload2Line} label="Download" />
-              <ActionButton onClick={generateImage} icon={RiRestartLine} label="Regenerate" />
-              <ActionButton onClick={() => setImage(null)} icon={RiCloseLine} />
+              <ActionButton onClick={downloadImage} icon={Download} label="Download" />
+              <ActionButton onClick={generateImage} icon={RotateCcw} label="Regenerate" />
             </div>
           )}
         </div>
