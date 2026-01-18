@@ -40,7 +40,7 @@ export default function Page() {
 
           <div className="w-full flex justify-center">
             <Link href="/create">
-              <button className="px-14 py-4 border border-white bg-[#dedfe1]/80 text-black rounded-md font-bold transition-all duration-300 hover:bg-white/80 transform hover:scale-105 active:scale-95 shadow-xl opacity-90">
+              <button className="px-14 py-4 border border-white bg-[#dedfe1]/80 text-black rounded-md font-bold transition-all duration-300 hover:bg-white/80 transform hover:scale-105 active:scale-95 shadow-xl tracking-wider opacity-90">
                 Start Creating
               </button>
             </Link>
