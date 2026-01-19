@@ -30,9 +30,10 @@ export default function CreatePage() {
         body: JSON.stringify({ prompt }),
       })
 
-      const text = await response.text()
-      const data = JSON.parse(text)
-      if (!response.ok) throw new Error(data.error || "Generation failed")
+      const data = await response.json()
+        if (!response.ok) {
+        throw new Error(data.error || "Generation failed")
+
 
       setImage(data.image)
     } catch (err) {
