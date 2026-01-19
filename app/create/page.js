@@ -14,8 +14,7 @@ export default function CreatePage() {
   const [model, setModel] = useState("sdxl")
   const [showAdvanced, setShowAdvanced] = useState(false)
   const [showModelPicker, setShowModelPicker] = useState(false)
-  
-  // Advanced settings for FLUX
+
   const [width, setWidth] = useState(1024)
   const [height, setHeight] = useState(1024)
   const [steps, setSteps] = useState(25)
@@ -129,7 +128,6 @@ export default function CreatePage() {
           )}
         </button>
 
-        {/* Model and Advanced Settings Buttons */}
         <div className="flex gap-3">
           <button
             type="button"
@@ -150,7 +148,6 @@ export default function CreatePage() {
           </button>
         </div>
 
-        {/* Advanced Settings Panel */}
         {showAdvanced && model === "flux" && (
           <div className="p-4 rounded-lg bg-black/60 border border-neutral-800 space-y-4">
             <div className="space-y-2">
@@ -231,7 +228,6 @@ export default function CreatePage() {
         </div>
       )}
 
-      {/* Model Picker Modal */}
       {showModelPicker && (
         <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
           <div className="bg-neutral-900 border border-neutral-800 rounded-lg p-6 max-w-md w-full">
@@ -288,7 +284,7 @@ export default function CreatePage() {
         </div>
       )}
 
-      <footer className="bottom-2 text-sm text-neutral-400 flex items-center justify-center gap-2">
+      <footer className="fixed bottom-1 text-sm text-neutral-400 flex items-center justify-center gap-2">
         <a
           href="https://priyanshu.is-a.dev"
           target="_blank"
