@@ -284,7 +284,7 @@ export default function CreatePage() {
         </div>
       )}
 
-      <footer className="fixed bottom-1 text-sm text-neutral-400 flex items-center justify-center gap-2">
+     {/* <footer className="fixed bottom-1 text-sm text-neutral-400 flex items-center justify-center gap-2">
         <a
           href="https://priyanshu.is-a.dev"
           target="_blank"
@@ -294,7 +294,7 @@ export default function CreatePage() {
           Made with <FaHeart className="text-red-500" /> by Priyanshu
           <ArrowUpRight className="w-4 h-4" />
         </a>
-      </footer>
+      </footer> */}
     </div>
   )
 }
