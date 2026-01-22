@@ -25,11 +25,8 @@ export const metadata = {
 
 export default function CreateLayout({ children }) {
   return (
-    <html lang="en">
-      <head />
-      <body className="bg-black text-white font-outfit">
-        {children}
-      </body>
-    </html>
+    <div className="bg-black text-white font-outfit">
+      {children}
+    </div>
   )
 }
