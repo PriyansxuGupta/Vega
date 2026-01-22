@@ -1,5 +1,3 @@
-import './globals.css'
-
 export const metadata = {
   title: 'Generate images with Flux.2-KLEIN for free',
   description: 'Create stunning AI-generated images instantly using Flux 2 KLEIN.',
@@ -24,7 +22,7 @@ export const metadata = {
 }
 
 export default function CreateLayout({ children }) {
-  return (
+  return ( 
     <div className="bg-black text-white font-outfit">
       {children}
     </div>
